@@ -6,10 +6,10 @@ using DG.Tweening;
 public class Cube : MonoBehaviour
 {
 
-    List<Tween> posTweenList;    
+    List<Tween> posTweenList;
     private void Awake()
     {
-        
+
         M_Observer.OnGameFail += GameFail;
 
     }
@@ -21,7 +21,7 @@ public class Cube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnDestroy()
     {
@@ -31,27 +31,25 @@ public class Cube : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         posTweenList = new List<Tween>();
-       
+
         float delayTime;
-        if (other.tag == "Engel")
+        if (other.tag == "Obstacle")
         {
             delayTime = 0.25f;
-            GameObject _hamburger = gameObject;
-            _hamburger.transform.tag = "Bos";
+
             transform.SetParent(other.transform);
 
-            posTweenList= PlayerContainer.II.ObjectTransforms(delayTime);
+            posTweenList = M_Game.I.ObjectTransforms(delayTime);
 
 
         }
-        if (other.tag == "Lav")
+        if (other.tag == "Lava")
         {
             delayTime = 0.05f;
-            GameObject _hamburger = gameObject;
-            _hamburger.transform.tag = "Bos";
+
             transform.SetParent(other.transform);
 
-            posTweenList= PlayerContainer.II.ObjectTransforms(delayTime);
+            posTweenList = M_Game.I.ObjectTransforms(delayTime);
 
         }
         if (other.tag == "Finish")
@@ -59,21 +57,23 @@ public class Cube : MonoBehaviour
             M_Observer.OnGameComplete?.Invoke();
         }
     }
+
+
     void GameFail()
     {
-        if (posTweenList!=null)
-        {
-            for (int i = 0; i < posTweenList.Count; i++)
-            {
-                posTweenList[i].Kill();
-            }
+        //    if (posTweenList != null)
+        //    {
+        //        for (int i = 0; i < posTweenList.Count; i++)
+        //        {
+        //            posTweenList[i].Kill();
+        //        }
 
-        }
-        
     }
+
+    //}
     //private void OnCollisionEnter(Collision collision)
     //{
-        
+
     //}
-  
+
 }

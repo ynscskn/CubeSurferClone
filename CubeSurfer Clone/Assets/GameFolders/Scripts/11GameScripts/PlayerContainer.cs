@@ -5,87 +5,33 @@ using DG.Tweening;
 
 public class PlayerContainer : MonoBehaviour
 {
-    public GameObject Player;
-    public GameObject Cubes;
-    public GameObject PlayerPrefab;
-
+    Tween MoveTween;
     private void Awake()
     {
-        II = this;
-        M_Observer.OnGameStart += PlayerCreate;
+        M_Observer.OnGameStart += GameStart;
     }
     private void OnDestroy()
     {
-        M_Observer.OnGameStart -= PlayerCreate;
+        M_Observer.OnGameStart -= GameStart;
 
     }
-    void Start()
+
+    void GameStart()
     {
-        
+        MoveTween = this.transform.DOPath(M_Game.I.RoadPath.ToArray(), 20).SetLookAt(0.05f).SetEase(Ease.Linear).SetSpeedBased().SetLoops(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void PlayerCreate()
-    {
-        GameObject _player = Instantiate(PlayerPrefab,Player.transform);
-        _player.transform.localPosition = Vector3.zero;
-    }
-  
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Hamburger")
-        {
-          
-            GameObject _hamburger = Instantiate( other.gameObject);
-            _hamburger.transform.position = Cubes.transform.position;
-            _hamburger.transform.SetParent(Cubes.transform);
-            _hamburger.transform.localPosition = (Cubes.transform.childCount-1) * new Vector3(0,2,0);
-            Player.transform.localPosition = Cubes.transform.childCount * new Vector3(0,2,0);
-            _hamburger.transform.localEulerAngles = new Vector3(-90, 0, 0);
+        //print("123123");
+        //if (other.transform.tag == "Cube")
+        //{
+        //    GameObject currentCube = other.gameObject;
+        //    currentCube.transform.SetParent(Cubes);
+        //    currentCube.transform.DOLocalMove(Vector3.zero, 0.5f).SetEase(Ease.OutSine);
+        //    //currentCube.transform.localPosition = (Cubes.transform.childCount - 1) * new Vector3(0, 2, 0);
+        //    M_Game.I.CurrentPlayer.transform.DOLocalMove(Cubes.transform.childCount * new Vector3(0, 2, 0), 0.5f).SetEase(Ease.OutExpo);
+        //}
+    }
 
-            Destroy(other.gameObject);
-        }
-    }
-    public List<Tween> ObjectTransforms(float delayTime)
-    {
-        List<Tween> playerTweenList = new List<Tween>();
-        int posY=0;
-        for (int i = 0; i < Cubes.transform.childCount; i++)
-        {
-            Tween _cubeTween = Cubes.transform.GetChild(i).transform.DOLocalMove(new Vector3( 0,posY,0) , 20).SetDelay(delayTime).SetSpeedBased();
-            playerTweenList.Add(_cubeTween);
-            posY += 2;
-        }
-      Tween _playerTween =   Player.transform.DOLocalMove(new Vector3 (0,posY,0),16).SetDelay(delayTime).SetSpeedBased();
-        playerTweenList.Add(_playerTween);
-        return playerTweenList;
-    }
-   
-  
-    public static PlayerContainer II;
-
-    public static PlayerContainer I
-    {
-        get
-        {
-            if (II == null)
-            {
-                GameObject _g = GameObject.Find("PlayerContainer");
-                if (_g != null)
-                {
-                    II = _g.GetComponent<PlayerContainer>();
-                }
-            }
-
-            return II;
-        }
-    }
-    IEnumerator waitSecond()
-    {
-        yield return new WaitForSeconds(0.5f);
-    }
 }

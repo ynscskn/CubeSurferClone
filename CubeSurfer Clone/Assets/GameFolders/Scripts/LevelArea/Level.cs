@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    public GameObject Roads;
+    [HideInInspector] public Path[] Paths;
 
     private void Awake()
     {
+
         M_Observer.OnGameCreate += GameCreate;
         M_Observer.OnGameStart += GameStart;
         M_Observer.OnGameReady += GameReady;
@@ -31,11 +34,24 @@ public class Level : MonoBehaviour
         M_Observer.OnGameNextLevel -= GameNextLevel;
     }
 
+    void CreatePath()
+    {
+        Paths = Roads.GetComponentsInChildren<Path>();
 
+
+        for (int i = 0; i < Paths.Length; i++)
+        {
+            for (int j = 0; j < Paths[i].PathTransformsArray.Length; j++)
+            {
+                M_Game.I.RoadPath.Add(Paths[i].PathTransformsArray[j].position);
+
+            }
+        }
+    }
 
     private void GameCreate()
     {
-        print("GameStart");
+        CreatePath();
     }
 
     private void GameStart()
