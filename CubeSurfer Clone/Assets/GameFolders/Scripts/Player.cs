@@ -14,41 +14,32 @@ public class Player : MonoBehaviour
         cubeConteiner = M_Game.I.CubeConteiner;
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Cube"))
         {
             currentCube = other.gameObject;
             currentCube.transform.SetParent(cubeConteiner);
-            print(cubeConteiner.transform.childCount);
 
             currentCube.transform.localPosition = (cubeConteiner.transform.childCount - 1) * new Vector3(0, 2, 0);
             M_Game.I.CurrentPlayer.transform.DOLocalMove(cubeConteiner.transform.childCount * new Vector3(0, 2, 0), 0.25f).SetEase(Ease.OutExpo);
             M_Game.I.CurrentPlayer.transform.DOLocalRotate(Vector3.zero, 0.25f).SetEase(Ease.OutExpo);
+            M_Game.I.SetCamera();
             currentCube = null;
         }
         if (other.transform.CompareTag("TurnLeft"))
         {
+            other.tag = "Untagged";
+            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw - 90f, 2f);//.SetEase(Ease.OutExpo);
         }
         if (other.transform.CompareTag("TurnRight"))
         {
+            other.tag = "Untagged";
+            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw + 90f, 2f);//.SetEase(Ease.OutExpo);
+        }
+        if (other.transform.CompareTag("Finish"))
+        {
+            M_Observer.OnGameComplete?.Invoke();
         }
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.transform.tag == "Engel" || other.transform.tag == "Lav")
-    //    {
-    //        M_Observer.OnGameFail?.Invoke();
-    //    }
-    //    if (other.transform.tag == "Finish")
-    //    {
-    //        M_Observer.OnGameComplete?.Invoke();
-    //    }
-    //}
-
 }

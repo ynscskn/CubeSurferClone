@@ -12,16 +12,20 @@ public class M_Game : MonoBehaviour
     public Transform PlayerConteiner;
     public Transform PlayerSpawn;
     public Transform CubeConteiner;
+    public CameraMultiTarget CameraMultiTarget;
 
     [HideInInspector] public GameObject CurrentPlayer;
     [HideInInspector] public List<Vector3> RoadPath;
     [HideInInspector] public bool IsPlaying = false;
+
+    List<Tween> playerTweenList;
 
 
     private void Awake()
     {
         II = this;
         RoadPath = new List<Vector3>();
+        playerTweenList = new List<Tween>();
 
         M_Observer.OnGameCreate += GameCreate;
         M_Observer.OnGameStart += GameStart;
@@ -79,7 +83,7 @@ public class M_Game : MonoBehaviour
 
     public List<Tween> ObjectTransforms(float delayTime)
     {
-        List<Tween> playerTweenList = new List<Tween>();
+        playerTweenList.Clear();
         int posY = 0;
         for (int i = 0; i < CubeConteiner.transform.childCount; i++)
         {
@@ -89,9 +93,31 @@ public class M_Game : MonoBehaviour
         }
         Tween _playerTween = CurrentPlayer.transform.DOLocalMove(new Vector3(0, posY, 0), 16).SetDelay(delayTime).SetSpeedBased();
         playerTweenList.Add(_playerTween);
+        SetCamera();
         return playerTweenList;
     }
 
+    int _childCount;
+    Tween _camTween;
+    public void SetCamera()
+    {
+        _childCount = CubeConteiner.childCount;
+
+        if (_childCount > 10) return;
+
+        else if (_childCount > 5)
+        {
+            if (_camTween != null) _camTween.Kill();
+            _camTween = DOTween.To(() => CameraMultiTarget.PaddingDown, x => CameraMultiTarget.PaddingDown = x, _childCount * -1, 1f);//.SetEase(Ease.OutExpo);
+        }
+        else if (_childCount <= 5)
+        {
+            if (CameraMultiTarget.PaddingDown != 0)
+            {
+                DOTween.To(() => CameraMultiTarget.PaddingDown, x => CameraMultiTarget.PaddingDown = x, 0, 1f);//.SetEase(Ease.OutExpo);// CameraMultiTarget.PaddingDown = 0;
+            }
+        }
+    }
     public static M_Game II;
 
     public static M_Game I
