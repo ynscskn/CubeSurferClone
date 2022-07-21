@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class M_Menu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class M_Menu : MonoBehaviour
 
     [HideInInspector] public GameObject CurrentPanel;
     [HideInInspector] public bool OnPause;
+
     private void Awake()
     {
         II = this;
@@ -59,7 +61,12 @@ public class M_Menu : MonoBehaviour
 
     private void GameFail()
     {
-        SetPanel(GameOverPanel);
+        StartCoroutine(delay());
+        IEnumerator delay()
+        {
+            yield return new WaitForSeconds(1);
+            SetPanel(GameOverPanel);
+        }
     }
 
     private void GameRetry()

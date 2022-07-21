@@ -16,6 +16,7 @@ public class M_Game : MonoBehaviour
 
     [HideInInspector] public GameObject CurrentPlayer;
     [HideInInspector] public List<Vector3> RoadPath;
+    [HideInInspector] public List<Vector3> FinalPath;
     [HideInInspector] public bool IsPlaying = false;
 
     List<Tween> playerTweenList;
@@ -25,6 +26,7 @@ public class M_Game : MonoBehaviour
     {
         II = this;
         RoadPath = new List<Vector3>();
+        FinalPath = new List<Vector3>();
         playerTweenList = new List<Tween>();
 
         M_Observer.OnGameCreate += GameCreate;
@@ -51,7 +53,7 @@ public class M_Game : MonoBehaviour
 
     private void GameFail()
     {
-        throw new NotImplementedException();
+        IsPlaying = false;
     }
 
     private void OnEnable()
@@ -72,7 +74,7 @@ public class M_Game : MonoBehaviour
 
         screenDeltaX = delta.x * Screen.width / 1080;
 
-        if (screenDeltaX == 0 && !IsPlaying) return;
+        if (screenDeltaX == 0 || !IsPlaying) return;
 
         playerPosX += 0.05f * screenDeltaX;
 

@@ -41,5 +41,23 @@ public class Player : MonoBehaviour
         {
             M_Observer.OnGameComplete?.Invoke();
         }
+        if (other.transform.CompareTag("FinalRoad"))
+        {
+            M_Observer.OnStartFinal?.Invoke();
+        }
+        if (other.transform.CompareTag("Reward"))
+        {
+            Destroy(other.gameObject);
+            M_Score.I.Score++;
+            M_Score.I.SetScore();
+        }
+
+        if (cubeConteiner.childCount < 1)
+        {
+            if (other.transform.CompareTag("Lava") || other.transform.CompareTag("Obstacle"))
+            {
+                M_Observer.OnGameFail?.Invoke();
+            }
+        }
     }
 }

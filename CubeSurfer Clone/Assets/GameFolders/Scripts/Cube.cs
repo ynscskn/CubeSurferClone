@@ -23,7 +23,7 @@ public class Cube : MonoBehaviour
         posTweenList = new List<Tween>();
 
         float delayTime;
-        if (other.tag == "Obstacle")
+        if (other.CompareTag("Obstacle"))
         {
             delayTime = 0.25f;
 
@@ -33,9 +33,9 @@ public class Cube : MonoBehaviour
 
 
         }
-        if (other.tag == "Lava")
+        if (other.CompareTag("Lava"))
         {
-            delayTime = 0.05f;
+            delayTime = 0.15f;
 
             transform.SetParent(other.transform);
 

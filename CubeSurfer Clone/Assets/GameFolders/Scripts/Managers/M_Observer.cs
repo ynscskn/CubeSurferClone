@@ -17,7 +17,7 @@ public class M_Observer : MonoBehaviour
 
     public static Action<int> OnComboEvent;
     public static Action OnGameCompleteAction;
-    public static Action OnPieceSpawn;
+    public static Action OnStartFinal;
 
 
     private void Awake()
@@ -35,6 +35,7 @@ public class M_Observer : MonoBehaviour
         OnGameNextLevel += GameNextLevel;
         OnGamePause += GamePause;
         OnGameMainMenu += GameMainMenu;
+        OnStartFinal += StartFinal;
 
     }
 
@@ -55,12 +56,18 @@ public class M_Observer : MonoBehaviour
         OnGameNextLevel -= GameNextLevel;
         OnGamePause -= GamePause;
         OnGameMainMenu -= GameMainMenu;
+        OnStartFinal -= StartFinal;
+
 
     }
 
     private void GameMainMenu()
     {
         //print("GameMenu");
+    }
+    private void StartFinal()
+    {
+        //print("StartFinal");
     }
 
     private void GameCreate()

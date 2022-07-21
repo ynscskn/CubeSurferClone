@@ -6,6 +6,8 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public GameObject Roads;
+    public GameObject FinalRoad;
+
     [HideInInspector] public Path[] Paths;
 
     private void Awake()
@@ -36,6 +38,7 @@ public class Level : MonoBehaviour
 
     void CreatePath()
     {
+        
         Paths = Roads.GetComponentsInChildren<Path>();
 
 
