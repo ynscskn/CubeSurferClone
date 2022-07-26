@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8218925141307721078}
   - component: {fileID: 4786385831661368814}
   m_Layer: 0
-  m_Name: standart-long-platform-001
+  m_Name: standard-long-platform-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -27,37 +27,41 @@ public class Player : MonoBehaviour
             M_Game.I.SetCamera();
             currentCube = null;
         }
-        if (other.transform.CompareTag("TurnLeft"))
-        {
-            other.tag = "Untagged";
-            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw - 90f, 2f);//.SetEase(Ease.OutExpo);
-        }
-        if (other.transform.CompareTag("TurnRight"))
-        {
-            other.tag = "Untagged";
-            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw + 90f, 2f);//.SetEase(Ease.OutExpo);
-        }
-        if (other.transform.CompareTag("Finish"))
-        {
-            M_Observer.OnGameComplete?.Invoke();
-        }
-        if (other.transform.CompareTag("FinalRoad"))
-        {
-            M_Observer.OnStartFinal?.Invoke();
-        }
-        if (other.transform.CompareTag("Reward"))
+        else if (other.transform.CompareTag("Reward"))
         {
             Destroy(other.gameObject);
             M_Score.I.Score++;
             M_Score.I.SetScore();
         }
 
-        if (cubeConteiner.childCount < 1)
+        else if (cubeConteiner.childCount < 1)
         {
             if (other.transform.CompareTag("Lava") || other.transform.CompareTag("Obstacle"))
             {
                 M_Observer.OnGameFail?.Invoke();
             }
         }
+
+        else if (other.transform.CompareTag("TurnLeft"))
+        {
+            other.tag = "Untagged";
+            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw - 90f, 2f);//.SetEase(Ease.OutExpo);
+        }
+        else if (other.transform.CompareTag("TurnRight"))
+        {
+            other.tag = "Untagged";
+            DOTween.To(() => CameraMultiTarget.Yaw, x => CameraMultiTarget.Yaw = x, CameraMultiTarget.Yaw + 90f, 2f);//.SetEase(Ease.OutExpo);
+        }
+        else if (other.transform.CompareTag("Finish"))
+        {
+            M_Observer.OnGameComplete?.Invoke();
+        }
+        else if (other.transform.CompareTag("FinalRoad"))
+        {
+            M_Observer.OnStartFinal?.Invoke();
+        }
+
+
+
     }
 }

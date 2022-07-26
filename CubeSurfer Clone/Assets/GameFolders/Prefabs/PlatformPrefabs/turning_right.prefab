@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: -7460903056364155507}
   - component: {fileID: 3398584823129228898}
   m_Layer: 0
-  m_Name: viraj-platform-right
+  m_Name: turning_right
   m_TagString: TurnRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

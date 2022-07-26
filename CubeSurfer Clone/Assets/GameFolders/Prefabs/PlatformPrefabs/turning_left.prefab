@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 5138733147855133842}
   - component: {fileID: 6107055543018213120}
   m_Layer: 0
-  m_Name: viraj-platform-left
+  m_Name: turning_left
   m_TagString: TurnLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

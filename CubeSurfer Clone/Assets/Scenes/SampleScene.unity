@@ -739,6 +739,27 @@ MonoBehaviour:
   Levels:
   - {fileID: 5883258820018011563, guid: 60282df1aef0f5e4b920044bfd9ac007, type: 3}
   - {fileID: 5883258820018011563, guid: 42a4a556a5bb09a48a743c26879bac43, type: 3}
+  TurningRoadPrefabs:
+  - {fileID: 5138733147855133842, guid: 11db2305853c40b4c94c3f0efb8da65c, type: 3}
+  - {fileID: -7460903056364155507, guid: f5a69e4fbc6c72446aa48921285d58ec, type: 3}
+  LavaRoadPrefabs:
+  - {fileID: 4116265015025292309, guid: bda1f4660fc8f9d44a46903372ccf00c, type: 3}
+  - {fileID: -1049552917345972986, guid: 033ae21b0c40bf04c85a5721ff4e7289, type: 3}
+  - {fileID: 1519363901350744550, guid: 6f96caadd361fe04a87025c790b20013, type: 3}
+  StandardRoadPrefab: {fileID: 4786385831661368814, guid: a9943f3c717ed754dad158209314e941, type: 3}
+  FinalPlatformPrefab: {fileID: 6759473719469937293, guid: 679e1212d11c305438a693e4d55a46f5, type: 3}
+  ObstaclePrefabs:
+  - {fileID: -7006744286571403212, guid: f6ce8caae05cdfa42ac7c4a86cbc6fc6, type: 3}
+  - {fileID: 2595913443951803234, guid: 52d4a6a323ad68441957a6b91b092427, type: 3}
+  - {fileID: -2306759609955811743, guid: 7ab8f96b09993f4439075b6607537ad2, type: 3}
+  - {fileID: 4388846787457770751, guid: f67e54ffa9778a247b92a938ae379a3e, type: 3}
+  - {fileID: -6555080648743439324, guid: bf544e38853961c4c80195675b193760, type: 3}
+  - {fileID: -6617286172712055904, guid: c31a274e21b97244997d1900dd8a8608, type: 3}
+  - {fileID: -3433096668738289856, guid: d4ca115ce1475bf49934338241244a9b, type: 3}
+  - {fileID: 2006226769456065177, guid: e47ef5734bf869b40bde1d2db52e07f1, type: 3}
+  - {fileID: -2003161622925419198, guid: 455da5764451b1d429cadd2aae3c67a6, type: 3}
+  - {fileID: 4567812167206310689, guid: dd18dd2f70da89643905633360c9693c, type: 3}
+  - {fileID: 8130824844788583838, guid: 965015e14152a5345925f1ea2038465b, type: 3}
   CurrentLevel: {fileID: 0}
   LevelIndex: 0
 --- !u!1 &1793850793
